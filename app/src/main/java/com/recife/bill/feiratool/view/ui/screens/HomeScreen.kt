@@ -1,5 +1,6 @@
 package com.recife.bill.feiratool.view.ui.screens
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -9,6 +10,7 @@ import androidx.navigation.NavHostController
 import com.ifpe.edu.br.common.CommonConstants
 import com.ifpe.edu.br.common.components.CustomColumn
 import com.ifpe.edu.br.common.components.CustomText
+import com.ifpe.edu.br.common.components.RectButton
 import com.recife.bill.feiratool.viewmodel.AirPowerViewModel
 
 @Composable
@@ -27,4 +29,18 @@ fun HomeScreen(
             CustomText(text = "home")
         }
     )
+
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        CustomColumn(
+            alignmentStrategy = CommonConstants.Ui.ALIGNMENT_TOP,
+            layouts = listOf {
+                RectButton(
+                    text = "Nova Lista",
+                    onClick = { navController.navigate(Screen.NewList.route) }
+                )
+            }
+        )
+    }
 }

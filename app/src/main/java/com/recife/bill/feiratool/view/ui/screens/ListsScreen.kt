@@ -24,7 +24,7 @@ fun ListsScreen(
             .fillMaxSize(),
         alignmentStrategy = CommonConstants.Ui.ALIGNMENT_TOP,
         layouts = listOf {
-            CustomText(text = "home")
+            CustomText(text = "ListsScreen")
         }
     )
 }

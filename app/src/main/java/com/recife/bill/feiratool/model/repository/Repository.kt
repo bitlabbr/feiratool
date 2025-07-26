@@ -5,7 +5,6 @@ import com.recife.bill.feiratool.model.utils.AirPowerLog
 
 class Repository private constructor(context: Context) {
     //private val db = AirPowerDatabase.getDataBaseInstance(context)
-
     companion object {
         @Volatile
         private var instance: Repository? = null
@@ -27,6 +26,11 @@ class Repository private constructor(context: Context) {
         }
 
         private val TAG = Repository::class.simpleName
+
+
+    }
+
+    fun createList(listName: String) {
 
     }
 }

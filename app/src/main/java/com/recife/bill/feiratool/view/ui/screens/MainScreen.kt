@@ -142,5 +142,15 @@ fun NavHostContainer(
                 ProfileScreen(navController, mainViewModel)
             }
         }
+
+        composable(Screen.NewList.route) {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                NewListScreen(navController, mainViewModel)
+            }
+        }
+
     }
 }
