@@ -52,7 +52,7 @@ public class AirPowerUtil {
         if (AirPowerLog.ISLOGABLE)
             AirPowerLog.d(TAG, "getCurrentDateTime");
         SimpleDateFormat dateFormat =
-                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
         Date currentDate = new Date();
         return dateFormat.format(currentDate);
     }

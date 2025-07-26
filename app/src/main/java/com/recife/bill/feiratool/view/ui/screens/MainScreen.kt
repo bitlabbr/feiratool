@@ -17,9 +17,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.navArgument
 import com.ifpe.edu.br.common.CommonConstants
 import com.ifpe.edu.br.common.components.BottomNavItem
 import com.ifpe.edu.br.common.components.CustomColumn
@@ -31,6 +33,7 @@ import com.recife.bill.feiratool.view.ui.theme.appBackgroundGradientDark
 import com.recife.bill.feiratool.view.ui.theme.appBackgroundGradientLight
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_light
 import com.recife.bill.feiratool.viewmodel.AirPowerViewModel
+import java.util.UUID
 
 @Composable
 fun MainScreen(
@@ -152,5 +155,24 @@ fun NavHostContainer(
             }
         }
 
+        composable(
+            route = Screen.ListDetail.route,
+            arguments = listOf(navArgument("listId") {
+                type = NavType.StringType
+            })
+        ) { backStackEntry ->
+            val result = runCatching {
+                val listIdString = backStackEntry.arguments?.getString("listId")
+                val listUuid = UUID.fromString(listIdString)
+                ListDetailScreen(
+                    listId = listUuid,
+                    navController = navController,
+                    mainViewModel = mainViewModel
+                )
+            }
+            if (!result.isSuccess) {
+                navController.popBackStack()
+            }
+        }
     }
 }

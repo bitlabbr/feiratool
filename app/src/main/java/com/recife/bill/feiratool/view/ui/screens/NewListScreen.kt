@@ -55,6 +55,7 @@ fun NewListScreen(
                 text = "Criar",
                 onClick = {
                     mainViewModel.createList(listName)
+                    navController.popBackStack()
                 }
             )
         }
