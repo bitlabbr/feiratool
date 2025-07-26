@@ -30,5 +30,6 @@ data class ShoppItemEntry(
     @ColumnInfo(name = "item_id")
     val itemId: String,
     val itemCount: Int,
-    val itemsValue: Double
+    val itemsValue: Double,
+    val priceAtTimeOfEntry: Double,
 )
