@@ -2,8 +2,10 @@ package com.recife.bill.feiratool.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import com.recife.bill.feiratool.model.repository.Repository
 import com.recife.bill.feiratool.view.manager.UIStateManager
+import kotlinx.coroutines.launch
 
 
 class AirPowerViewModel(
@@ -16,7 +18,9 @@ class AirPowerViewModel(
 
 
     fun createList(listName: String) {
-        repository.createList(listName)
+        viewModelScope.launch {
+            repository.createList(listName)
+        }
     }
 
 }
