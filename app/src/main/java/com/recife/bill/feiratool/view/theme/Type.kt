@@ -1,4 +1,4 @@
-package com.recife.bill.feiratool.ui.theme
+package com.recife.bill.feiratool.view.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

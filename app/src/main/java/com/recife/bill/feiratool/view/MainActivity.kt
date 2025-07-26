@@ -1,4 +1,4 @@
-package com.recife.bill.feiratool
+package com.recife.bill.feiratool.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.recife.bill.feiratool.ui.theme.FeiraToolTheme
+import com.recife.bill.feiratool.view.theme.FeiraToolTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
