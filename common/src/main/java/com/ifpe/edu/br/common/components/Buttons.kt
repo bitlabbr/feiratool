@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -68,19 +69,21 @@ fun RoundedButton(
 fun RectButton(
     text: String,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier.fillMaxWidth(),
+    enabled: Boolean = true,
     fontSize: TextUnit = 20.sp,
-    colors: ButtonColors = ButtonColors(
-        contentColor = White,
+    colors: ButtonColors = ButtonDefaults.buttonColors(
         containerColor = MaterialTheme.colorScheme.primary,
-        disabledContentColor = Color.Gray,
-        disabledContainerColor = Color.Gray
-    ),
-    modifier: Modifier = Modifier
-        .fillMaxWidth()
+        contentColor = Color.White,
+        disabledContainerColor = Color.Gray.copy(alpha = 0.5f),
+        disabledContentColor = Color.White.copy(alpha = 0.7f)
+    )
 ) {
     Button(
         onClick = onClick,
         modifier = modifier,
+        // 3. O estado 'enabled' é passado para o Button interno
+        enabled = enabled,
         colors = colors,
         shape = RectangleShape
     ) {

@@ -181,7 +181,7 @@ fun NavHostContainer(
         ) { backStackEntry ->
             val result = runCatching {
                 val listIdString = backStackEntry.arguments?.getString("listId")
-                AddEntryScreen(
+                NewEntryScreen(
                     listId = listIdString!!,
                     navController = navController,
                     mainViewModel = mainViewModel

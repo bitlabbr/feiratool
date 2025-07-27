@@ -37,6 +37,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.TextStyle
 
 @Composable
 fun TextTitle(
@@ -76,29 +77,30 @@ fun CustomInputText(
         focusedContainerColor = MaterialTheme.colorScheme.onSecondaryContainer,
         unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer
     ),
-    iconColor: Color = MaterialTheme.colorScheme.onPrimary
+    iconColor: Color = MaterialTheme.colorScheme.onPrimary,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    textAlign: TextAlign = TextAlign.Start,
+    isError: Boolean = false,
+    supportingText: @Composable (() -> Unit)? = null
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
+
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp),
-        label = label?.let {
-            { Text(it) }
-        },
-        placeholder = {
-            Text(
-                placeholder,
-                color = iconColor
-            )
-        },
+        label = label?.let { { Text(it) } },
+        placeholder = { Text(placeholder, color = iconColor) },
         singleLine = singleLine,
         visualTransformation = if (isPassword && !passwordVisible) PasswordVisualTransformation() else VisualTransformation.None,
-        keyboardOptions = KeyboardOptions.Default.copy(
-            keyboardType = if (isPassword) KeyboardType.Password else KeyboardType.Text
-        ),
+
+        keyboardOptions = if (isPassword) KeyboardOptions(keyboardType = KeyboardType.Password) else keyboardOptions,
+        textStyle = TextStyle(textAlign = textAlign),
+        isError = isError,
+        supportingText = supportingText,
+
         leadingIcon = leadingIcon,
         trailingIcon = if (isPassword) {
             {

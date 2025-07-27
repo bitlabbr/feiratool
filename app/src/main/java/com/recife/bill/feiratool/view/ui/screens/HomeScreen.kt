@@ -36,10 +36,7 @@ fun HomeScreen(
         CustomColumn(
             alignmentStrategy = CommonConstants.Ui.ALIGNMENT_TOP,
             layouts = listOf {
-                RectButton(
-                    text = "Nova Lista",
-                    onClick = { navController.navigate(Screen.NewList.route) }
-                )
+
             }
         )
     }
