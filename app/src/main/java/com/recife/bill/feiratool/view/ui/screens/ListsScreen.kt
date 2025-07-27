@@ -19,18 +19,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.ifpe.edu.br.common.CommonConstants
 import com.ifpe.edu.br.common.components.CustomColumn
-import com.ifpe.edu.br.common.components.CustomText
 import com.ifpe.edu.br.common.components.RectButton
 import com.recife.bill.feiratool.view.ui.components.CardDefault
 import com.recife.bill.feiratool.view.ui.components.CustomDivider
 import com.recife.bill.feiratool.view.ui.components.ShoppListCard
-import com.recife.bill.feiratool.view.ui.theme.tb_primary_light
 import com.recife.bill.feiratool.viewmodel.AirPowerViewModel
 
 @Composable
@@ -52,15 +49,14 @@ fun ListsScreen(
         alignmentStrategy = CommonConstants.Ui.ALIGNMENT_TOP,
         layouts = listOf {
             CardDefault(
-                layouts = listOf{
+                layouts = listOf {
 
                     if (shopListFlow.value.isEmpty()) {
                         Spacer(modifier = Modifier.padding(vertical = 40.dp))
                         EmptyStateMessage()
                         Spacer(modifier = Modifier.padding(vertical = 20.dp))
                     } else {
-                        shopListFlow.value.forEach {
-                                item ->
+                        shopListFlow.value.forEach { item ->
                             ShoppListCard(
                                 navController,
                                 item

@@ -13,7 +13,7 @@ data class ShoppList(
     val name: String = "",
     @ColumnInfo(name = "LIST_DATE")
     val date: String = "",
-    val listValue: Double,
+    var listValue: Double,
     val budget: Double,
-    val itemsCount: Int,
+    var itemsCount: Int,
 )

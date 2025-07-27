@@ -63,6 +63,28 @@ class Repository private constructor(context: Context) {
     ) {
         db.shoppListDao().insertShoppItem(shoppItem)
         db.shoppListDao().insertShoppItemEntry(shoppItemEntry)
+
+        updateListTotals(shoppItemEntry.listId, shoppItemEntry)
+    }
+
+    private suspend fun updateListTotals(
+        listId: String,
+        shoppItemEntry: ShoppItemEntry
+    ) {
+        val listById = db.shoppListDao().getShoppListWithEntriesByListId(listId)
+
+        if (listById != null) {
+            val newTotalValue = listById.shoppList.listValue + shoppItemEntry.itemsValue
+            val newItemsCount = listById.shoppList.itemsCount + shoppItemEntry.itemCount
+
+            listById.shoppList.itemsCount = newItemsCount
+            listById.shoppList.listValue = newTotalValue
+
+            db.shoppListDao().updateShoppList(listById.shoppList)
+
+            retrieveCurrentShoppList(listId)
+            loadAllShoppingLists()
+        }
     }
 
     suspend fun retrieveCurrentShoppList(listId: String) {

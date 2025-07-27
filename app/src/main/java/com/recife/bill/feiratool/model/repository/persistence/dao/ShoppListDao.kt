@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.recife.bill.feiratool.model.repository.persistence.model.ShopItem
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppItemEntry
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppList
@@ -15,6 +16,9 @@ interface ShoppListDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertShoppList(shoppList: ShoppList)
+
+    @Update
+    suspend fun updateShoppList(shoppList: ShoppList)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertShoppItem(shoppItem: ShopItem)
