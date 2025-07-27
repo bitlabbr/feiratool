@@ -17,21 +17,17 @@ interface ShoppListDao {
     suspend fun insertShoppList(shoppList: ShoppList)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertShopItem(shopItem: ShopItem)
+    suspend fun insertShoppItem(shoppItem: ShopItem)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertShoppItemEntry(entry: ShoppItemEntry)
 
-
     @Transaction
     @Query("SELECT * FROM SHOPP_LIST WHERE LIST_ID = :listId")
-    suspend fun getShoppListWithEntries(listId: String): ShoppListWithEntries?
+    suspend fun getShoppListWithEntriesByListId(listId: String): ShoppListWithEntries?
 
     @Transaction
     @Query("SELECT * FROM SHOPP_LIST ORDER BY LIST_DATE DESC")
     suspend fun getAllShoppListsWithEntries(): List<ShoppListWithEntries>
 
-    @Transaction
-    @Query("SELECT * FROM SHOPP_LIST ORDER BY LIST_DATE DESC")
-    suspend fun getAllShoppLists(): List<ShoppList>
 }

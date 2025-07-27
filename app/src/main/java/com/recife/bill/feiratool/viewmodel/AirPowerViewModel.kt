@@ -4,6 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.recife.bill.feiratool.model.repository.Repository
+import com.recife.bill.feiratool.model.repository.persistence.model.ShopItem
+import com.recife.bill.feiratool.model.repository.persistence.model.ShoppItemEntry
+import com.recife.bill.feiratool.model.repository.persistence.model.ShoppList
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppListWithEntries
 import com.recife.bill.feiratool.view.manager.UIStateManager
 import kotlinx.coroutines.flow.StateFlow
@@ -19,9 +22,9 @@ class AirPowerViewModel(
     private var repository = Repository.getInstance()
 
 
-    fun createList(listName: String) {
+    fun createList(shoppList: ShoppList) {
         viewModelScope.launch {
-            repository.createList(listName)
+            repository.createShoppList(shoppList)
         }
     }
 
@@ -32,7 +35,26 @@ class AirPowerViewModel(
     }
 
     fun getShoppLists(): StateFlow<List<ShoppListWithEntries>> {
-        return repository.shoppingLists
+        return repository.allShoppingLists
+    }
+
+    fun addNewItemAndEntry(
+        shoppItem: ShopItem,
+        shoppItemEntry: ShoppItemEntry
+    ) {
+        viewModelScope.launch {
+            repository.addNewItemAndEntry(shoppItem, shoppItemEntry)
+        }
+    }
+
+    fun retrieveCurrentShoppList(listId: String) {
+        viewModelScope.launch {
+            repository.retrieveCurrentShoppList(listId)
+        }
+    }
+
+    fun getCurrentShoppList(): StateFlow<ShoppListWithEntries> {
+        return repository.currentShoppingList
     }
 
 }

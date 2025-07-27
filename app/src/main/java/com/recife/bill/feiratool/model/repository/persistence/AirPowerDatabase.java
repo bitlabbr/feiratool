@@ -13,7 +13,7 @@ import com.recife.bill.feiratool.model.repository.persistence.model.ShoppList;
 import com.recife.bill.feiratool.model.utils.AirPowerLog;
 
 @Database(entities = {
-        ShoppItemEntry.class, ShoppList.class, ShopItem.class}, version = 2, exportSchema = false)
+        ShoppItemEntry.class, ShoppList.class, ShopItem.class}, version = 4, exportSchema = false)
 public abstract class AirPowerDatabase extends RoomDatabase {
 
     public static final String TAG = AirPowerDatabase.class.getSimpleName();

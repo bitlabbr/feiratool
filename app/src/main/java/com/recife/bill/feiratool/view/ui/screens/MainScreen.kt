@@ -33,7 +33,6 @@ import com.recife.bill.feiratool.view.ui.theme.appBackgroundGradientDark
 import com.recife.bill.feiratool.view.ui.theme.appBackgroundGradientLight
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_light
 import com.recife.bill.feiratool.viewmodel.AirPowerViewModel
-import java.util.UUID
 
 @Composable
 fun MainScreen(
@@ -163,9 +162,27 @@ fun NavHostContainer(
         ) { backStackEntry ->
             val result = runCatching {
                 val listIdString = backStackEntry.arguments?.getString("listId")
-                val listUuid = UUID.fromString(listIdString)
                 ListDetailScreen(
-                    listId = listUuid,
+                    listId = listIdString!!,
+                    navController = navController,
+                    mainViewModel = mainViewModel
+                )
+            }
+            if (!result.isSuccess) {
+                navController.popBackStack()
+            }
+        }
+
+        composable(
+            route = Screen.NewEntry.route,
+            arguments = listOf(navArgument("listId") {
+                type = NavType.StringType
+            })
+        ) { backStackEntry ->
+            val result = runCatching {
+                val listIdString = backStackEntry.arguments?.getString("listId")
+                AddEntryScreen(
+                    listId = listIdString!!,
                     navController = navController,
                     mainViewModel = mainViewModel
                 )

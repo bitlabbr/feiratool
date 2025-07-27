@@ -54,6 +54,17 @@ fun ShoppListCard(
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        CustomText(
+                            color = tb_primary_light,
+                            text = item.shoppList.listValue.toString(),
+                            fontSize = 20.sp
+                        )
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.End
                     ) {
                         CustomText(
