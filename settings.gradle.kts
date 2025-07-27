@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "FeiraTool"
 include(":app")
- 
+include(":common")

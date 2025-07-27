@@ -1,4 +1,4 @@
-package com.recife.bill.feiratool.ui.theme
+package com.recife.bill.feiratool.view.ui.theme
 
 import android.app.Activity
 import android.os.Build
