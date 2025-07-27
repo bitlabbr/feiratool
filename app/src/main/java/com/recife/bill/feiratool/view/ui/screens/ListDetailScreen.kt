@@ -32,6 +32,7 @@ import com.recife.bill.feiratool.view.ui.components.CardDefault
 import com.recife.bill.feiratool.view.ui.components.CustomDivider
 import com.recife.bill.feiratool.view.ui.components.ShopEntryCard
 import com.recife.bill.feiratool.view.ui.components.ShoppingListSummary
+import com.recife.bill.feiratool.view.ui.components.defaultButtonColors
 import com.recife.bill.feiratool.viewmodel.AirPowerViewModel
 
 @Composable
@@ -106,6 +107,7 @@ fun ListDetailScreen(
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     RectButton(
+                                        colors = defaultButtonColors(),
                                         text = "Adicionar Item",
                                         onClick = {
                                             navController.navigate(

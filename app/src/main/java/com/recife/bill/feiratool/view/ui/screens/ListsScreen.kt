@@ -28,6 +28,7 @@ import com.ifpe.edu.br.common.components.RectButton
 import com.recife.bill.feiratool.view.ui.components.CardDefault
 import com.recife.bill.feiratool.view.ui.components.CustomDivider
 import com.recife.bill.feiratool.view.ui.components.ShoppListCard
+import com.recife.bill.feiratool.view.ui.components.defaultButtonColors
 import com.recife.bill.feiratool.viewmodel.AirPowerViewModel
 
 @Composable
@@ -68,6 +69,7 @@ fun ListsScreen(
                     Spacer(modifier = Modifier.padding(vertical = 15.dp))
 
                     RectButton(
+                        colors = defaultButtonColors(),
                         text = "Nova Lista",
                         onClick = { navController.navigate(Screen.NewList.route) }
                     )

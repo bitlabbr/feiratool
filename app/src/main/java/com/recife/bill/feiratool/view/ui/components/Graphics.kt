@@ -2,6 +2,8 @@ package com.recife.bill.feiratool.view.ui.components
 
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextFieldColors
@@ -31,5 +33,15 @@ fun defaultInputTextColors(): TextFieldColors {
         unfocusedLabelColor = tb_primary_light,
         focusedContainerColor = Color.White,
         unfocusedContainerColor = Color.White
+    )
+}
+
+@Composable
+fun defaultButtonColors(): ButtonColors {
+    return ButtonDefaults.buttonColors(
+        containerColor = tb_primary_light,
+        contentColor = Color.White,
+        disabledContainerColor = Color.Gray.copy(alpha = 0.5f),
+        disabledContentColor = Color.White.copy(alpha = 0.7f)
     )
 }

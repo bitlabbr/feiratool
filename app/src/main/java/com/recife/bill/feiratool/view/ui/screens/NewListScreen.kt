@@ -30,6 +30,7 @@ import com.recife.bill.feiratool.model.repository.persistence.model.ShoppList
 import com.recife.bill.feiratool.model.utils.AirPowerUtil
 import com.recife.bill.feiratool.view.ui.components.CardDefault
 import com.recife.bill.feiratool.view.ui.components.CustomDivider
+import com.recife.bill.feiratool.view.ui.components.defaultButtonColors
 import com.recife.bill.feiratool.view.ui.components.defaultInputTextColors
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_light
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_secondary
@@ -110,6 +111,7 @@ fun NewListScreen(
 
                 // --- BOTÃO CRIAR LISTA ---
                 RectButton(
+                    colors = defaultButtonColors(),
                     text = "Criar Lista",
                     modifier = Modifier.fillMaxWidth(),
                     enabled = listName.isNotBlank(),

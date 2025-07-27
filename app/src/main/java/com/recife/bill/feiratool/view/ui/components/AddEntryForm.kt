@@ -89,6 +89,7 @@ fun AddEntryForm(
         Spacer(modifier = Modifier.height(30.dp))
 
         RectButton(
+            colors = defaultButtonColors(),
             text = "Adicionar à Lista",
             enabled = newItemName.isNotBlank() && quantity.isNotBlank() && price.isNotBlank(),
             onClick = {
