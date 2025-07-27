@@ -1,6 +1,7 @@
 package com.recife.bill.feiratool.model.repository.persistence.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -34,4 +35,9 @@ interface ShoppListDao {
     @Query("SELECT * FROM SHOPP_LIST ORDER BY LIST_DATE DESC")
     suspend fun getAllShoppListsWithEntries(): List<ShoppListWithEntries>
 
+    @Delete
+    suspend fun deleteShoppItemEntry(entry: ShoppItemEntry)
+
+    @Delete
+    suspend fun deleteShoppList(shoppList: ShoppList)
 }

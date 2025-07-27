@@ -20,6 +20,7 @@ import com.ifpe.edu.br.common.components.CustomCard
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppListWithEntries
 import com.recife.bill.feiratool.view.ui.screens.Screen
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_light
+import com.recife.bill.feiratool.view.ui.theme.tb_primary_secondary
 
 @Composable
 fun ShoppListCard(
@@ -46,7 +47,7 @@ fun ShoppListCard(
                 ) {
                     Text(
                         text = item.shoppList.name,
-                        fontSize = 20.sp,
+                        fontSize = 30.sp,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onSurface
                     )
@@ -109,7 +110,7 @@ fun ShoppListCard(
                             text = "R$ ${"%.2f".format(item.shoppList.listValue)}",
                             fontSize = 25.sp,
                             fontWeight = FontWeight.Medium,
-                            color = tb_primary_light
+                            color = tb_primary_secondary
                         )
                     }
                 }

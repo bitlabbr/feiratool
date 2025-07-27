@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
+    
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.runtime.livedata)

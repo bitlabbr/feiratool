@@ -64,10 +64,10 @@ class Repository private constructor(context: Context) {
         db.shoppListDao().insertShoppItem(shoppItem)
         db.shoppListDao().insertShoppItemEntry(shoppItemEntry)
 
-        updateListTotals(shoppItemEntry.listId, shoppItemEntry)
+        updateListTotalsAddEntry(shoppItemEntry.listId, shoppItemEntry)
     }
 
-    private suspend fun updateListTotals(
+    private suspend fun updateListTotalsAddEntry(
         listId: String,
         shoppItemEntry: ShoppItemEntry
     ) {
@@ -85,6 +85,33 @@ class Repository private constructor(context: Context) {
             retrieveCurrentShoppList(listId)
             loadAllShoppingLists()
         }
+    }
+
+    private suspend fun updateListTotalsRemoveEntry(
+        listId: String,
+        shoppItemEntry: ShoppItemEntry
+    ) {
+        val listById = db.shoppListDao().getShoppListWithEntriesByListId(listId)
+
+        if (listById != null) {
+            val newTotalValue = listById.shoppList.listValue - shoppItemEntry.itemsValue
+            val newItemsCount = listById.shoppList.itemsCount - shoppItemEntry.itemCount
+
+            listById.shoppList.itemsCount = newItemsCount
+            listById.shoppList.listValue = newTotalValue
+
+            db.shoppListDao().updateShoppList(listById.shoppList)
+
+            retrieveCurrentShoppList(listId)
+            loadAllShoppingLists()
+        }
+    }
+
+    suspend fun deleteItemEntry(
+        shoppItemEntry: ShoppItemEntry
+    ) {
+        db.shoppListDao().deleteShoppItemEntry(shoppItemEntry)
+        updateListTotalsRemoveEntry(shoppItemEntry.listId, shoppItemEntry)
     }
 
     suspend fun retrieveCurrentShoppList(listId: String) {
@@ -108,5 +135,10 @@ class Repository private constructor(context: Context) {
             ),
             entries = emptyList()
         )
+    }
+
+    suspend fun deleteShoppList(shoppList: ShoppList) {
+        db.shoppListDao().deleteShoppList(shoppList)
+        loadAllShoppingLists()
     }
 }

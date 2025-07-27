@@ -57,4 +57,16 @@ class AirPowerViewModel(
         return repository.currentShoppingList
     }
 
+    fun deleteItemEntry(entry: ShoppItemEntry) {
+        viewModelScope.launch {
+            repository.deleteItemEntry(entry)
+        }
+    }
+
+    fun deleteShoppList(shoppList: ShoppList) {
+        viewModelScope.launch {
+            repository.deleteShoppList(shoppList)
+        }
+    }
+
 }
