@@ -12,7 +12,6 @@ import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SwipeToDismissBoxState
 import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.TextFieldColors
@@ -25,6 +24,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_light
+import com.recife.bill.feiratool.view.ui.theme.tb_primary_secondary
 
 
 @Composable
@@ -62,8 +62,8 @@ fun defaultButtonColors(): ButtonColors {
 fun SwipeToDeleteBackground(dismissState: SwipeToDismissBoxState) {
     val color = when (dismissState.targetValue) {
         SwipeToDismissBoxValue.Settled -> Color.Transparent
-        SwipeToDismissBoxValue.StartToEnd -> Color.Red.copy(alpha = 0.8f)
-        SwipeToDismissBoxValue.EndToStart -> Color.Red.copy(alpha = 0.8f)
+        SwipeToDismissBoxValue.StartToEnd -> tb_primary_secondary.copy(alpha = 0.8f)
+        SwipeToDismissBoxValue.EndToStart -> tb_primary_secondary.copy(alpha = 0.8f)
     }
 
     val scale by animateFloatAsState(
