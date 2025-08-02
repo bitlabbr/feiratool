@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,48 +50,48 @@ fun ShoppListCard(
                         text = item.shoppList.name,
                         fontSize = 30.sp,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = Color.Black
                     )
                 }
 
                 Spacer(modifier = Modifier.padding(vertical = 5.dp))
-
-                // --- LINHA DE ITENS E ORÇAMENTO ---
+                // --- LINHA DO ORÇAMENTO ---
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
+                    horizontalArrangement = Arrangement.End,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "Itens: ",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Normal,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Text(
-                            text = "${item.shoppList.itemsCount}",
-                            fontSize = 14.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "Orçamento: ",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Normal,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Text(
-                            text = "R$ ${"%.2f".format(item.shoppList.budget)}",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = tb_primary_light
-                        )
-                    }
+                    Text(
+                        text = "Orçamento: ",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Color.Black.copy(alpha = .8f)
+                    )
+                    Text(
+                        text = "R$ ${"%.2f".format(item.shoppList.budget)}",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = tb_primary_light
+                    )
                 }
-
+                // --- LINHA DE ITENS ---
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Itens: ",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Color.Black.copy(alpha = .8f)
+                    )
+                    Text(
+                        text = "${item.shoppList.itemsCount}",
+                        fontSize = 14.sp,
+                        color = Color.Black
+                    )
+                }
                 Spacer(modifier = Modifier.padding(vertical = 5.dp))
                 // --- LINHA DO TOTAL ---
                 Row(
@@ -98,21 +99,18 @@ fun ShoppListCard(
                     horizontalArrangement = Arrangement.End,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "Total: ",
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Normal,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Text(
-                            text = "R$ ${"%.2f".format(item.shoppList.listValue)}",
-                            fontSize = 25.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = tb_primary_secondary
-                        )
-                    }
+                    Text(
+                        text = "Total: ",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Color.Black.copy(alpha = .8f)
+                    )
+                    Text(
+                        text = "R$ ${"%.2f".format(item.shoppList.listValue)}",
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = tb_primary_secondary
+                    )
                 }
 
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
@@ -126,7 +124,7 @@ fun ShoppListCard(
                     Text(
                         text = item.shoppList.date,
                         fontSize = 14.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = Color.Black.copy(alpha = .8f)
                     )
                 }
             }

@@ -1,7 +1,6 @@
 package com.recife.bill.feiratool.view.ui.screens
 
 import androidx.activity.ComponentActivity
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,7 +28,6 @@ import com.ifpe.edu.br.common.components.CustomNavigationBar
 import com.ifpe.edu.br.common.components.CustomText
 import com.ifpe.edu.br.common.components.CustomTopBar
 import com.ifpe.edu.br.common.components.GradientBackground
-import com.recife.bill.feiratool.view.ui.theme.appBackgroundGradientDark
 import com.recife.bill.feiratool.view.ui.theme.appBackgroundGradientLight
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_light
 import com.recife.bill.feiratool.viewmodel.AirPowerViewModel
@@ -85,6 +83,7 @@ fun MainScreen(
                     if (shouldShowBottomBar) {
                         CustomNavigationBar(
                             backgroundColor = Color.Transparent,
+                            contentColor = tb_primary_light,
                             navController = navController,
                             items = listOf(
                                 BottomNavItem.Home,
@@ -96,8 +95,7 @@ fun MainScreen(
                 }
             ) { innerPadding ->
                 GradientBackground(
-                    if (isSystemInDarkTheme()) appBackgroundGradientDark
-                    else appBackgroundGradientLight
+                    appBackgroundGradientLight
                 )
                 NavHostContainer(
                     navController = navController,

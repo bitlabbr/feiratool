@@ -32,7 +32,7 @@ fun CustomDivider() {
     Divider(
         modifier = Modifier.padding(vertical = 1.dp, horizontal = 16.dp),
         thickness = 1.dp,
-        color = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f)
+        color = Color.Black.copy(alpha = 0.2f)
     )
 }
 
