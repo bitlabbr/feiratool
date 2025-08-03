@@ -1,6 +1,6 @@
 package com.recife.bill.feiratool.view.ui.screens
 
-sealed class Screen(val route: String, var label: String = "") {
+sealed class Screen(val route: String, val label: String = "") {
     data object Home : Screen("home", "Início")
 
     data object Lists : Screen("lists", "Listas")
