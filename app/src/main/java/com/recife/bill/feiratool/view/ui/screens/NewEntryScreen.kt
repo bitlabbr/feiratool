@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.ifpe.edu.br.common.components.CustomText
 import com.recife.bill.feiratool.view.ui.components.AddEntryForm
 import com.recife.bill.feiratool.view.ui.components.CardDefault
 import com.recife.bill.feiratool.view.ui.components.CustomDivider
@@ -50,10 +51,9 @@ fun NewEntryScreen(
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
+                    CustomText(
                         text = "Novo item",
                         fontSize = 30.sp,
-                        fontWeight = FontWeight.Bold,
                         color = tb_primary_light
                     )
                 }

@@ -7,17 +7,19 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.ifpe.edu.br.common.components.CustomCard
+import com.ifpe.edu.br.common.components.CustomText
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppListWithEntries
+import com.recife.bill.feiratool.model.utils.formatAsCurrencyBr
 import com.recife.bill.feiratool.view.ui.screens.Screen
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_light
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_secondary
@@ -42,79 +44,73 @@ fun ShoppListCard(
                 // --- LINHA DO TÍTULO ---
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Start,
+                    horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
+                    CustomText(
                         text = item.shoppList.name,
-                        fontSize = 30.sp,
+                        color = Color.Black,
+                        alignment = TextAlign.Justify,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
+                        fontSize = 40.sp,
+                        minFontSize = 30.sp,
+                        maxLines = Int.MAX_VALUE,
                     )
                 }
-
-                Spacer(modifier = Modifier.padding(vertical = 5.dp))
-
-                // --- LINHA DE ITENS E ORÇAMENTO ---
+                Spacer(modifier = Modifier.padding(vertical = 10.dp))
+                // --- LINHA DO ORÇAMENTO ---
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
+                    horizontalArrangement = Arrangement.End,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "Itens: ",
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Normal,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Text(
-                            text = "${item.shoppList.itemsCount}",
-                            fontSize = 14.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "Orçamento: ",
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Normal,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Text(
-                            text = "R$ ${"%.2f".format(item.shoppList.budget)}",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = tb_primary_light
-                        )
-                    }
+                    CustomText(
+                        text = "Orçamento: ",
+                        fontSize = 20.sp,
+                        color = Color.Black.copy(alpha = .6f)
+                    )
+                    CustomText(
+                        text = item.shoppList.budget.formatAsCurrencyBr(),
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = tb_primary_light
+                    )
                 }
-
-                Spacer(modifier = Modifier.padding(vertical = 5.dp))
                 // --- LINHA DO TOTAL ---
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "Total: ",
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Normal,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Text(
-                            text = "R$ ${"%.2f".format(item.shoppList.listValue)}",
-                            fontSize = 25.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = tb_primary_secondary
-                        )
-                    }
+                    CustomText(
+                        text = "Total: ",
+                        fontSize = 20.sp,
+                        color = Color.Black.copy(alpha = .6f)
+                    )
+                    CustomText(
+                        text = item.shoppList.listValue.formatAsCurrencyBr(),
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = tb_primary_secondary
+                    )
                 }
-
+                // --- LINHA DE ITENS ---
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    CustomText(
+                        text = "Itens: ",
+                        fontSize = 20.sp,
+                        color = Color.Black.copy(alpha = .6f)
+                    )
+                    CustomText(
+                        text = "${item.shoppList.itemsCount}",
+                        fontSize = 25.sp,
+                        color = Color.Black
+                    )
+                }
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
                 // --- LINHA DA DATA ---
                 Row(
@@ -123,10 +119,10 @@ fun ShoppListCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
 
-                    Text(
+                    CustomText(
                         text = item.shoppList.date,
-                        fontSize = 14.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        fontSize = 18.sp,
+                        color = Color.Black.copy(alpha = .5f)
                     )
                 }
             }

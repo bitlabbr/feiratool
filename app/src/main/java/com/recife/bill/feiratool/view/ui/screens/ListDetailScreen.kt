@@ -30,11 +30,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.ifpe.edu.br.common.CommonConstants
 import com.ifpe.edu.br.common.components.CustomColumn
+import com.ifpe.edu.br.common.components.CustomText
 import com.ifpe.edu.br.common.components.RectButton
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppItemEntry
 import com.recife.bill.feiratool.view.ui.components.CardDefault
@@ -47,7 +50,6 @@ import com.recife.bill.feiratool.view.ui.components.defaultButtonColors
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_light
 import com.recife.bill.feiratool.viewmodel.AirPowerViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListDetailScreen(
     listId: String,
@@ -90,14 +92,20 @@ fun ListDetailScreen(
                                 .fillMaxWidth()
                         ) {
                             item {
+                                // LINHA TITULO
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.Center,
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    Text(
+                                    CustomText(
                                         text = details.shoppList.name,
-                                        style = MaterialTheme.typography.headlineMedium,
+                                        color = Color.Black,
+                                        alignment = TextAlign.Center,
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 40.sp,
+                                        minFontSize = 20.sp,
+                                        maxLines = Int.MAX_VALUE,
                                         modifier = Modifier.padding(vertical = 24.dp)
                                     )
                                 }

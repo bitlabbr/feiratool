@@ -23,6 +23,7 @@ import com.ifpe.edu.br.common.components.CustomInputText
 import com.ifpe.edu.br.common.components.RectButton
 import com.recife.bill.feiratool.model.repository.persistence.model.ShopItem
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppItemEntry
+import com.recife.bill.feiratool.view.ui.theme.tb_primary_light
 import com.recife.bill.feiratool.viewmodel.AirPowerViewModel
 import java.util.UUID
 
@@ -46,6 +47,7 @@ fun AddEntryForm(
                 newItemName = it
                 isNameError = it.isBlank()
             },
+            iconColor = tb_primary_light,
             label = "Nome do Produto",
             placeholder = "Ex: Café Santa Clara 500g",
             isError = isNameError,
@@ -66,7 +68,8 @@ fun AddEntryForm(
                 },
                 label = "Qtd.",
                 textAlign = TextAlign.Center,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                iconColor = tb_primary_light
             )
             // --- CAMPO PREÇO UNITÁRIO ---
             CustomInputText(
@@ -82,7 +85,8 @@ fun AddEntryForm(
                 label = "Preço Unitário",
                 placeholder = "0,00",
                 textAlign = TextAlign.End,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                iconColor = tb_primary_light
             )
         }
 

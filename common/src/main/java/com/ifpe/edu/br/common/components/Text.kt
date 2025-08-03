@@ -38,6 +38,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
+import kotlin.math.max
 
 @Composable
 fun TextTitle(
@@ -120,22 +122,36 @@ fun CustomInputText(
 
 @Composable
 fun CustomText(
-    text: String?,
+    text: String,
     alignment: TextAlign = TextAlign.Left,
     color: Color = MaterialTheme.colorScheme.onPrimary,
     fontSize: TextUnit = 16.sp,
+    minFontSize: TextUnit = 12.sp,
+    threshold: Int = 10,
+    maxLines: Int = 1,
+    overflow: TextOverflow = TextOverflow.Ellipsis,
     fontWeight: FontWeight = FontWeight.Bold,
     modifier: Modifier = Modifier
         .wrapContentWidth()
         .padding(start = 4.dp, end = 4.dp)
 ) {
-    val customText = text ?: ""
+    val adjustedSize = remember(text) {
+        val length = text.length
+        if (length <= threshold) fontSize
+        else {
+            val excess = length - threshold
+            val reduced = fontSize.value - excess
+            max(minFontSize.value, reduced).sp
+        }
+    }
     Text(
         textAlign = alignment,
-        text = customText,
+        text = text,
         color = color,
-        fontSize = fontSize,
+        fontSize = adjustedSize,
         fontWeight = fontWeight,
-        modifier = modifier
+        modifier = modifier,
+        maxLines = maxLines,
+        overflow = overflow
     )
 }
