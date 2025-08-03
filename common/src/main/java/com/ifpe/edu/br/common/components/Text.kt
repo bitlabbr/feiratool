@@ -130,7 +130,7 @@ fun CustomText(
     threshold: Int = 10,
     maxLines: Int = 1,
     overflow: TextOverflow = TextOverflow.Ellipsis,
-    fontWeight: FontWeight = FontWeight.Bold,
+    fontWeight: FontWeight = FontWeight.Normal,
     modifier: Modifier = Modifier
         .wrapContentWidth()
         .padding(start = 4.dp, end = 4.dp)
