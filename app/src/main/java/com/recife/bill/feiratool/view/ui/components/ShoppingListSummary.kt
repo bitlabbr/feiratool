@@ -9,11 +9,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ifpe.edu.br.common.components.CustomColumn
 import com.ifpe.edu.br.common.components.CustomText
 import com.recife.bill.feiratool.model.utils.formatAsCurrencyBr
 import com.recife.bill.feiratool.view.ui.theme.tb_green_light
@@ -36,17 +39,49 @@ fun ShoppingListSummary(totalValue: Double, budget: Double) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            CustomText(
-                text = "Total da Compra:",
-                fontSize = 20.sp,
-                color = Color.Black.copy(alpha = .8f)
-            )
-            CustomText(
-                text = totalValue.formatAsCurrencyBr(),
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold,
-                color = tb_primary_secondary
-            )
+            if (totalValue.formatAsCurrencyBr().length > 10) {
+                CustomColumn(
+                    layouts = listOf {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Start,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            CustomText(
+                                text = "Total da Compra:",
+                                fontSize = 20.sp,
+                                color = Color.Black.copy(alpha = .8f)
+                            )
+                        }
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.End,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            CustomText(
+                                text = totalValue.formatAsCurrencyBr(),
+                                fontSize = 30.sp,
+                                fontWeight = FontWeight.Bold,
+                                overflow = TextOverflow.Visible,
+                                color = tb_primary_secondary
+                            )
+                        }
+                    }
+                )
+            } else {
+                CustomText(
+                    text = "Total da Compra:",
+                    fontSize = 20.sp,
+                    color = Color.Black.copy(alpha = .8f)
+                )
+                CustomText(
+                    text = totalValue.formatAsCurrencyBr(),
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold,
+                    overflow = TextOverflow.Visible,
+                    color = tb_primary_secondary
+                )
+            }
         }
         // --- LINHA DO ORÇAMENTO ---
         Row(
@@ -56,11 +91,13 @@ fun ShoppingListSummary(totalValue: Double, budget: Double) {
             CustomText(
                 text = "Orçamento:",
                 fontSize = 20.sp,
+                maxLines = 2,
                 color = Color.Black.copy(alpha = .8f)
             )
             CustomText(
                 text = budget.formatAsCurrencyBr(),
                 fontSize = 25.sp,
+                overflow = TextOverflow.Visible,
                 fontWeight = FontWeight.Bold,
                 color = tb_primary_light
             )
@@ -82,6 +119,7 @@ fun ShoppingListSummary(totalValue: Double, budget: Double) {
             CustomText(
                 text = remaining.formatAsCurrencyBr(),
                 fontSize = 35.sp,
+                overflow = TextOverflow.Visible,
                 fontWeight = FontWeight.Bold,
                 color = remainingColor
             )

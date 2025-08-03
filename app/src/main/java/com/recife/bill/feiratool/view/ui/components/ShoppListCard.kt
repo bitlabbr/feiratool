@@ -13,10 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.ifpe.edu.br.common.components.CustomCard
+import com.ifpe.edu.br.common.components.CustomColumn
 import com.ifpe.edu.br.common.components.CustomText
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppListWithEntries
 import com.recife.bill.feiratool.model.utils.formatAsCurrencyBr
@@ -61,38 +63,107 @@ fun ShoppListCard(
                 // --- LINHA DO ORÇAMENTO ---
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End,
+                    horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    CustomText(
-                        text = "Orçamento: ",
-                        fontSize = 20.sp,
-                        color = Color.Black.copy(alpha = .6f)
-                    )
-                    CustomText(
-                        text = item.shoppList.budget.formatAsCurrencyBr(),
-                        fontSize = 25.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = tb_primary_light
-                    )
+                    if (item.shoppList.budget.formatAsCurrencyBr().length > 10) {
+                        CustomColumn(
+                            layouts = listOf{
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.Start,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    CustomText(
+                                        text = "Orçamento: ",
+                                        fontSize = 20.sp,
+                                        color = Color.Black.copy(alpha = .6f),
+                                        maxLines = 1
+                                    )
+                                }
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.End,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    CustomText(
+                                        text = item.shoppList.budget.formatAsCurrencyBr(),
+                                        fontSize = 25.sp,
+                                        overflow = TextOverflow.Visible,
+                                        fontWeight = FontWeight.Bold,
+                                        maxLines = 1,
+                                        color = tb_primary_light
+                                    )
+                                }
+                            }
+                        )
+                    } else {
+                        CustomText(
+                            text = "Orçamento: ",
+                            fontSize = 20.sp,
+                            color = Color.Black.copy(alpha = .6f),
+                            maxLines = 1
+                        )
+                        CustomText(
+                            text = item.shoppList.budget.formatAsCurrencyBr(),
+                            fontSize = 25.sp,
+                            overflow = TextOverflow.Visible,
+                            fontWeight = FontWeight.Bold,
+                            maxLines = 1,
+                            color = tb_primary_light
+                        )
+                    }
                 }
                 // --- LINHA DO TOTAL ---
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End,
+                    horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    CustomText(
-                        text = "Total: ",
-                        fontSize = 20.sp,
-                        color = Color.Black.copy(alpha = .6f)
-                    )
-                    CustomText(
-                        text = item.shoppList.listValue.formatAsCurrencyBr(),
-                        fontSize = 30.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = tb_primary_secondary
-                    )
+
+                    if (item.shoppList.listValue.formatAsCurrencyBr().length > 15) {
+                        CustomColumn(
+                            layouts = listOf{
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.Start,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    CustomText(
+                                        text = "Total: ",
+                                        fontSize = 20.sp,
+                                        color = Color.Black.copy(alpha = .6f)
+                                    )
+                                }
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.End,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    CustomText(
+                                        text = item.shoppList.listValue.formatAsCurrencyBr(),
+                                        fontSize = 30.sp,
+                                        overflow = TextOverflow.Visible,
+                                        fontWeight = FontWeight.Bold,
+                                        color = tb_primary_secondary
+                                    )
+                                }
+                            }
+                        )
+                    } else {
+                        CustomText(
+                            text = "Total: ",
+                            fontSize = 20.sp,
+                            color = Color.Black.copy(alpha = .6f)
+                        )
+                        CustomText(
+                            text = item.shoppList.listValue.formatAsCurrencyBr(),
+                            fontSize = 30.sp,
+                            overflow = TextOverflow.Visible,
+                            fontWeight = FontWeight.Bold,
+                            color = tb_primary_secondary
+                        )
+                    }
                 }
                 // --- LINHA DE ITENS ---
                 Row(
