@@ -129,7 +129,7 @@ fun CustomText(
     minFontSize: TextUnit = 12.sp,
     threshold: Int = 10,
     maxLines: Int = 1,
-    overflow: TextOverflow = TextOverflow.Visible,
+    overflow: TextOverflow = TextOverflow.Ellipsis,
     fontWeight: FontWeight = FontWeight.Bold,
     modifier: Modifier = Modifier
         .wrapContentWidth()
