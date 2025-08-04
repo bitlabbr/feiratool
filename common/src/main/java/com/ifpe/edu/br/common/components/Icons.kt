@@ -13,12 +13,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.ifpe.edu.br.common.ui.theme.cardCornerRadius
 
-/*
-* Trabalho de conclusão de curso - IFPE 2025
-* Author: Willian Santos
-* Project: AirPower Costumer
-*/
-
 @Composable
 fun RoundedImageIcon(
     description: String,

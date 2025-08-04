@@ -1,11 +1,5 @@
 package com.ifpe.edu.br.common.components
 
-/*
-* Trabalho de conclusão de curso - IFPE 2025
-* Author: Willian Santos
-* Project: AirPower Costumer
-*/
-
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -67,7 +61,9 @@ fun CustomInputText(
     modifier: Modifier = Modifier,
     label: String? = null,
     placeholder: String = "",
+    readOnly: Boolean = false,
     leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
     isPassword: Boolean = false,
     singleLine: Boolean = true,
     shape: Shape = RectangleShape,
@@ -93,6 +89,7 @@ fun CustomInputText(
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp),
+        readOnly = readOnly,
         label = label?.let { { Text(it) } },
         placeholder = { Text(placeholder, color = iconColor) },
         singleLine = singleLine,
@@ -114,7 +111,7 @@ fun CustomInputText(
                     )
                 }
             }
-        } else null,
+        } else trailingIcon,
         shape = shape,
         colors = inputFieldColors
     )
