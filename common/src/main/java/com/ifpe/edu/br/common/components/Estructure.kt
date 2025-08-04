@@ -18,8 +18,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -116,7 +117,16 @@ fun CustomNavigationBar(
     contentColor: Color = Color.Black,
     navController: NavHostController,
     showLabel: Boolean = true,
-    items: List<BottomNavItem>
+    items: List<BottomNavItem>,
+    colors: NavigationBarItemColors = NavigationBarItemDefaults.colors(
+        selectedIconColor = Color.Black.copy(alpha = .8f),
+        selectedTextColor = Color.Black.copy(alpha = .8f),
+        indicatorColor = Color.Black.copy(alpha = .2f),
+        unselectedIconColor = contentColor.copy(alpha = .8f),
+        unselectedTextColor = contentColor.copy(alpha = .8f),
+        disabledIconColor = contentColor.copy(alpha = .2f),
+        disabledTextColor = contentColor.copy(alpha = .6f)
+    )
 ) {
     NavigationBar(
         containerColor = backgroundColor,
@@ -139,8 +149,14 @@ fun CustomNavigationBar(
                         }
                     }
                 },
+                colors = colors,
                 icon = item.icon,
-                label = { Text(item.label) },
+                label = {
+                    CustomText(
+                        text = item.label,
+                        color = contentColor,
+                    )
+                },
                 alwaysShowLabel = showLabel
             )
         }

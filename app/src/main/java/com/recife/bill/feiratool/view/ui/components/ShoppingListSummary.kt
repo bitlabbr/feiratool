@@ -9,78 +9,135 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ifpe.edu.br.common.components.CustomColumn
+import com.ifpe.edu.br.common.components.CustomText
+import com.recife.bill.feiratool.model.utils.formatAsCurrencyBr
+import com.recife.bill.feiratool.view.ui.theme.tb_green_light
+import com.recife.bill.feiratool.view.ui.theme.tb_primary_light
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_secondary
 
 @Composable
 fun ShoppingListSummary(totalValue: Double, budget: Double) {
     val remaining = budget - totalValue
     val remainingColor =
-        if (remaining >= 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
+        if (remaining > 0) tb_green_light else tb_primary_secondary
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 16.dp, bottom = 8.dp)
     ) {
-        // --- Valor Total ---
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = "Total da Compra:",
-                fontSize = 16.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Text(
-                text = "R$ ${"%.2f".format(totalValue)}",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = tb_primary_secondary
-            )
-        }
-
+        TotalRow(totalValue)
+        BudgedRow(budget)
         Spacer(modifier = Modifier.padding(vertical = 8.dp))
+        CustomDivider()
+        Spacer(modifier = Modifier.padding(vertical = 15.dp))
+        BalanceRow(remaining, remainingColor)
+    }
+}
 
-        // --- Orçamento ---
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = "Orçamento:",
-                fontSize = 16.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+@Composable
+private fun BalanceRow(
+    remaining: Double,
+    remainingColor: Color
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        CustomText(
+            text = "Saldo:",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black.copy(alpha = .8f)
+        )
+        CustomText(
+            text = remaining.formatAsCurrencyBr(),
+            fontSize = 35.sp,
+            overflow = TextOverflow.Visible,
+            fontWeight = FontWeight.Bold,
+            color = remainingColor
+        )
+    }
+}
+
+@Composable
+private fun BudgedRow(budget: Double) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        CustomText(
+            text = "Orçamento:",
+            fontSize = 20.sp,
+            maxLines = 2,
+            color = Color.Black.copy(alpha = .8f)
+        )
+        CustomText(
+            text = budget.formatAsCurrencyBr(),
+            fontSize = 25.sp,
+            overflow = TextOverflow.Visible,
+            fontWeight = FontWeight.Bold,
+            color = tb_primary_light
+        )
+    }
+}
+
+@Composable
+private fun TotalRow(totalValue: Double) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        val totalValueFormated = totalValue.formatAsCurrencyBr()
+        if (totalValueFormated.length > 10) {
+            CustomColumn(
+                layouts = listOf {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        CustomText(
+                            text = "Total da Compra:",
+                            fontSize = 20.sp,
+                            color = Color.Black.copy(alpha = .8f)
+                        )
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        CustomText(
+                            text = totalValueFormated,
+                            fontSize = 30.sp,
+                            fontWeight = FontWeight.Bold,
+                            overflow = TextOverflow.Visible,
+                            color = tb_primary_secondary
+                        )
+                    }
+                }
             )
-            Text(
-                text = "R$ ${"%.2f".format(budget)}",
-                fontSize = 16.sp,
-                color = MaterialTheme.colorScheme.onSurface
+        } else {
+            CustomText(
+                text = "Total da Compra:",
+                fontSize = 20.sp,
+                color = Color.Black.copy(alpha = .8f)
             )
-        }
-
-        CustomDivider() // Usa o divisor que já criamos
-
-        // --- Saldo Restante ---
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = "Saldo:",
-                fontSize = 18.sp,
+            CustomText(
+                text = totalValueFormated,
+                fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-            Text(
-                text = "R$ ${"%.2f".format(remaining)}",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = remainingColor // Cor muda se o saldo for negativo
+                overflow = TextOverflow.Visible,
+                color = tb_primary_secondary
             )
         }
     }

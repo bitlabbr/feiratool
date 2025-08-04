@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.ifpe.edu.br.common.components.CustomInputText
+import com.ifpe.edu.br.common.components.CustomText
 import com.ifpe.edu.br.common.components.RectButton
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppList
 import com.recife.bill.feiratool.model.utils.AirPowerUtil
@@ -60,10 +61,9 @@ fun NewListScreen(
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
+                    CustomText(
                         text = "Criar lista",
                         fontSize = 30.sp,
-                        fontWeight = FontWeight.Bold,
                         color = tb_primary_light
                     )
                 }
@@ -71,7 +71,6 @@ fun NewListScreen(
                 Spacer(modifier = Modifier.padding(vertical = 15.dp))
 
                 CustomDivider()
-
                 // --- CAMPO NOME DA LISTA ---
                 CustomInputText(
                     inputFieldColors = defaultInputTextColors(),
@@ -82,7 +81,8 @@ fun NewListScreen(
                     },
                     label = "Nome da lista",
                     placeholder = "Ex: Compras do Mês",
-                    isError = isNameError
+                    isError = isNameError,
+                    iconColor = tb_primary_light
                 )
 
                 if (isNameError) {
@@ -104,7 +104,8 @@ fun NewListScreen(
                     label = "Orçamento da lista",
                     placeholder = "0,00",
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-                    textAlign = TextAlign.End
+                    textAlign = TextAlign.End,
+                    iconColor = tb_primary_light
                 )
 
                 Spacer(modifier = Modifier.padding(vertical = 30.dp))

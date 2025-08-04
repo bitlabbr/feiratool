@@ -11,7 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.ifpe.edu.br.common.components.CustomText
+import com.recife.bill.feiratool.view.ui.theme.app_dialog_backgroud
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_light
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_secondary
 
@@ -32,8 +37,26 @@ fun ConfirmationDialog(
                 modifier = Modifier.size(50.dp)
             )
         },
-        title = { Text(text = dialogTitle, color = Color.Black) },
-        text = { Text(text = dialogText, color = Color.Black) },
+        title = {
+            CustomText(
+                text = dialogTitle,
+                alignment = TextAlign.Center,
+                fontSize = 30.sp,
+                maxLines = Int.MAX_VALUE,
+                color = Color.Black.copy(alpha = .8f)
+            )
+        },
+        text = {
+            CustomText(
+                text = dialogText,
+                fontSize = 20.sp,
+                minFontSize = 15.sp,
+                alignment = TextAlign.Center,
+                fontWeight = FontWeight.Normal,
+                maxLines = Int.MAX_VALUE,
+                color = Color.Black.copy(alpha = .8f)
+            )
+        },
         onDismissRequest = { onDismissRequest() },
         confirmButton = {
             TextButton(
@@ -52,6 +75,7 @@ fun ConfirmationDialog(
             ) {
                 Text(text = "Cancelar", color = tb_primary_secondary)
             }
-        }
+        },
+        containerColor = app_dialog_backgroud
     )
 }

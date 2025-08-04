@@ -108,7 +108,8 @@ fun ListsScreen(
                             ) {
                                 RectButton(
                                     text = "Nova Lista",
-                                    onClick = { navController.navigate(Screen.NewList.route) }
+                                    onClick = { navController.navigate(Screen.NewList.route) },
+                                    colors = defaultButtonColors()
                                 )
                             }
                             Spacer(modifier = Modifier.padding(vertical = 10.dp))

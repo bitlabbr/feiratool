@@ -9,32 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 
-sealed class BottomNavItem(
+data class BottomNavItem(
     val route: String,
     val label: String,
     val icon: @Composable () -> Unit
 ) {
-    data object Home :
-        BottomNavItem(
-            "home",
-            "Início",
-            { Icon(Icons.Filled.Home, contentDescription = "Home", tint = Color.Black) })
-
-    data object Devices :
-        BottomNavItem(
-            "lists",
-            "Listas",
-            { Icon(Icons.Filled.Devices, contentDescription = "Device", tint = Color.Black) })
-
-    data object DashBoards :
-        BottomNavItem(
-            "profile",
-            "Perfil",
-            {
-                Icon(
-                    Icons.Filled.Assessment,
-                    contentDescription = "DashBoards",
-                    tint = Color.Black
-                )
-            })
+    override fun toString(): String {
+        return "BottomNavItem(route='$route', label='$label', icon=$icon)"
+    }
 }

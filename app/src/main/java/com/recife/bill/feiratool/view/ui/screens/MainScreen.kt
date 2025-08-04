@@ -1,11 +1,15 @@
 package com.recife.bill.feiratool.view.ui.screens
 
 import androidx.activity.ComponentActivity
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,7 +33,6 @@ import com.ifpe.edu.br.common.components.CustomNavigationBar
 import com.ifpe.edu.br.common.components.CustomText
 import com.ifpe.edu.br.common.components.CustomTopBar
 import com.ifpe.edu.br.common.components.GradientBackground
-import com.recife.bill.feiratool.view.ui.theme.appBackgroundGradientDark
 import com.recife.bill.feiratool.view.ui.theme.appBackgroundGradientLight
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_light
 import com.recife.bill.feiratool.viewmodel.AirPowerViewModel
@@ -85,19 +88,49 @@ fun MainScreen(
                     if (shouldShowBottomBar) {
                         CustomNavigationBar(
                             backgroundColor = Color.Transparent,
+                            contentColor = tb_primary_light,
                             navController = navController,
                             items = listOf(
-                                BottomNavItem.Home,
-                                BottomNavItem.Devices,
-                                BottomNavItem.DashBoards
+                                BottomNavItem(
+                                    route = Screen.Home.route,
+                                    label = Screen.Home.label,
+                                    icon = {
+                                        Icon(
+                                            Icons.Filled.Home,
+                                            contentDescription = "Home",
+                                            tint = tb_primary_light
+                                        )
+                                    }
+                                ),
+                                BottomNavItem(
+                                    route = Screen.Lists.route,
+                                    label = Screen.Lists.label,
+                                    icon = {
+                                        Icon(
+                                            Icons.Filled.ShoppingCart,
+                                            contentDescription = "Device",
+                                            tint = tb_primary_light
+                                        )
+                                    }
+                                ),
+                                BottomNavItem(
+                                    route = Screen.Profile.route,
+                                    label = Screen.Profile.label,
+                                    icon = {
+                                        Icon(
+                                            Icons.Filled.Person,
+                                            contentDescription = "Profile",
+                                            tint = tb_primary_light
+                                        )
+                                    }
+                                )
                             )
                         )
                     }
                 }
             ) { innerPadding ->
                 GradientBackground(
-                    if (isSystemInDarkTheme()) appBackgroundGradientDark
-                    else appBackgroundGradientLight
+                    appBackgroundGradientLight
                 )
                 NavHostContainer(
                     navController = navController,
@@ -117,7 +150,7 @@ fun NavHostContainer(
 ) {
     NavHost(
         navController = navController,
-        startDestination = BottomNavItem.Home.route,
+        startDestination = Screen.Home.route,
         modifier = modifier
     ) {
         composable(Screen.Home.route) {
