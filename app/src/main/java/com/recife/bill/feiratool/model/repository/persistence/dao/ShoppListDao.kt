@@ -23,9 +23,6 @@ interface ShoppListDao {
     suspend fun updateShoppList(shoppList: ShoppList)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertShoppItem(shoppItem: ShopItem)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProduct(product: Product)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

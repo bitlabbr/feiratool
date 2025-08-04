@@ -116,7 +116,7 @@ fun ListDetailScreen(
                             if (details.entries.isNotEmpty()) {
                                 items(
                                     items = details.entries,
-                                    key = { it.entry.itemId }
+                                    key = { it.entry.productId }
                                 ) { shoppEntryWithItem ->
 
                                     val dismissState = rememberSwipeToDismissBoxState(

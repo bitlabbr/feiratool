@@ -1,6 +1,7 @@
 package com.recife.bill.feiratool.view.ui.theme
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
@@ -16,6 +17,11 @@ val tb_green_light = Color(0xF075CC67)
 val tb_primary_secondary = Color(0xFFEE3838)
 val app_default_solid_background_dark = Color(0xD79A9696)
 val app_dialog_backgroud = Color(0xFFEFEBEB)
+
+
+val cardBackgroundGradientLightVariant = listOf(
+    app_dialog_backgroud, app_default_solid_background_dark
+)
 
 val app_default_solid_background_dark_variant = Color(0xD7C4C0C0)
 

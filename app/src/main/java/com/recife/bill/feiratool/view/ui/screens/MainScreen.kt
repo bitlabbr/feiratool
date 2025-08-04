@@ -150,7 +150,7 @@ fun NavHostContainer(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route,
+        startDestination = Screen.Lists.route,
         modifier = modifier
     ) {
         composable(Screen.Home.route) {

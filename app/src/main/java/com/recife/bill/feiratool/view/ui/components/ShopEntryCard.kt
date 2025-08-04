@@ -98,7 +98,7 @@ private fun ItemLabelRow(entryWithItem: ShoppEntryWithProduct) {
             modifier = Modifier.weight(1f),
             text = buildAnnotatedString {
                 withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                    append(entryWithItem.shopItem.name)
+                    append(entryWithItem.product.name)
                 }
             },
             fontSize = 20.sp,
