@@ -2,6 +2,7 @@ package com.recife.bill.feiratool.model.repository
 
 import android.content.Context
 import com.recife.bill.feiratool.model.repository.persistence.AirPowerDatabase
+import com.recife.bill.feiratool.model.repository.persistence.model.Product
 import com.recife.bill.feiratool.model.repository.persistence.model.ShopItem
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppItemEntry
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppList
@@ -20,6 +21,8 @@ class Repository private constructor(context: Context) {
     private val _currentShoppingList = MutableStateFlow<ShoppListWithEntries>(getEmptyCurrentList())
     val currentShoppingList: StateFlow<ShoppListWithEntries> get() = _currentShoppingList
 
+    private val _allProducts = MutableStateFlow<List<Product>>(emptyList())
+    val allProducts: StateFlow<List<Product>> get() = _allProducts
 
     companion object {
         @Volatile
@@ -44,6 +47,10 @@ class Repository private constructor(context: Context) {
         private val TAG = Repository::class.simpleName
     }
 
+    suspend fun loadAllProducts() {
+        _allProducts.value = db.shoppListDao().getAllProducts()
+    }
+
     suspend fun loadAllShoppingLists() {
         val allLists = db.shoppListDao().getAllShoppListsWithEntries()
         _allShoppingLists.value = allLists
@@ -58,10 +65,10 @@ class Repository private constructor(context: Context) {
     }
 
     suspend fun addNewItemAndEntry(
-        shoppItem: ShopItem,
+        product: Product,
         shoppItemEntry: ShoppItemEntry
     ) {
-        db.shoppListDao().insertShoppItem(shoppItem)
+        db.shoppListDao().insertProduct(product)
         db.shoppListDao().insertShoppItemEntry(shoppItemEntry)
 
         updateListTotalsAddEntry(shoppItemEntry.listId, shoppItemEntry)

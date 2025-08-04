@@ -7,7 +7,7 @@ import androidx.room.Index
 
 @Entity(
     tableName = "SHOPP_ENTRY_ITEM",
-    primaryKeys = ["list_id", "item_id"],
+    primaryKeys = ["list_id", "product_id"],
     foreignKeys = [
         ForeignKey(
             entity = ShoppList::class,
@@ -15,21 +15,31 @@ import androidx.room.Index
             childColumns = ["list_id"],
             onDelete = ForeignKey.CASCADE
         ),
+
         ForeignKey(
-            entity = ShopItem::class,
-            parentColumns = ["SHOPP_ITEM_ID"],
-            childColumns = ["item_id"],
+            entity = Product::class,
+            parentColumns = ["PRODUCT_ID"],
+            childColumns = ["product_id"],
             onDelete = ForeignKey.RESTRICT
         )
     ],
-    indices = [Index("list_id"), Index("item_id")]
+    indices = [Index("list_id"), Index("product_id")]
 )
 data class ShoppItemEntry(
     @ColumnInfo(name = "list_id")
     val listId: String,
-    @ColumnInfo(name = "item_id")
-    val itemId: String,
+    @ColumnInfo(name = "product_id")
+    val productId: String,
     val itemCount: Int,
     val itemsValue: Double,
     val priceAtTimeOfEntry: Double,
 )
+{
+    override fun toString(): String {
+        return "ShoppItemEntry(listId='$listId'," +
+                "productId='$productId'," +
+                "itemCount=$itemCount," +
+                "itemsValue=$itemsValue," +
+                "priceAtTimeOfEntry=$priceAtTimeOfEntry)"
+    }
+}

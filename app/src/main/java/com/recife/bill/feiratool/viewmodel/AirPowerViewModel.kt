@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.recife.bill.feiratool.model.repository.Repository
-import com.recife.bill.feiratool.model.repository.persistence.model.ShopItem
+import com.recife.bill.feiratool.model.repository.persistence.model.Product
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppItemEntry
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppList
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppListWithEntries
@@ -28,6 +28,16 @@ class AirPowerViewModel(
         }
     }
 
+    fun getAllProducts(): StateFlow<List<Product>> {
+        return repository.allProducts
+    }
+
+    fun loadAllProducts() {
+        viewModelScope.launch {
+            repository.loadAllProducts()
+        }
+    }
+
     fun loadAllShoppingLists() {
         viewModelScope.launch {
             repository.loadAllShoppingLists()
@@ -39,11 +49,11 @@ class AirPowerViewModel(
     }
 
     fun addNewItemAndEntry(
-        shoppItem: ShopItem,
+        product: Product,
         shoppItemEntry: ShoppItemEntry
     ) {
         viewModelScope.launch {
-            repository.addNewItemAndEntry(shoppItem, shoppItemEntry)
+            repository.addNewItemAndEntry(product, shoppItemEntry)
         }
     }
 

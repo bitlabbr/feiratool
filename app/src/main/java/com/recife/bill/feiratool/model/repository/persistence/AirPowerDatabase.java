@@ -7,13 +7,14 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.recife.bill.feiratool.model.repository.persistence.dao.ShoppListDao;
+import com.recife.bill.feiratool.model.repository.persistence.model.Product;
 import com.recife.bill.feiratool.model.repository.persistence.model.ShopItem;
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppItemEntry;
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppList;
 import com.recife.bill.feiratool.model.utils.AirPowerLog;
 
 @Database(entities = {
-        ShoppItemEntry.class, ShoppList.class, ShopItem.class}, version = 4, exportSchema = false)
+        ShoppItemEntry.class, ShoppList.class, Product.class}, version = 5, exportSchema = false)
 public abstract class AirPowerDatabase extends RoomDatabase {
 
     public static final String TAG = AirPowerDatabase.class.getSimpleName();
@@ -23,7 +24,6 @@ public abstract class AirPowerDatabase extends RoomDatabase {
     public static synchronized AirPowerDatabase getDataBaseInstance(Context context) {
         if (dbInstance == null) {
             dbInstance = Room.databaseBuilder(context, AirPowerDatabase.class, DATABASE_NAME)
-                    .allowMainThreadQueries()
                     .fallbackToDestructiveMigration() // TODO remove before release
                     .build();
             if (AirPowerLog.ISLOGABLE) AirPowerLog.d(TAG, "create instance");

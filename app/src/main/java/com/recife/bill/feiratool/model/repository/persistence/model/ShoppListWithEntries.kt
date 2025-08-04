@@ -12,5 +12,5 @@ data class ShoppListWithEntries(
         parentColumn = "LIST_ID",
         entityColumn = "list_id"
     )
-    val entries: List<ShoppEntryWithItem>
+    val entries: List<ShoppEntryWithProduct>
 )

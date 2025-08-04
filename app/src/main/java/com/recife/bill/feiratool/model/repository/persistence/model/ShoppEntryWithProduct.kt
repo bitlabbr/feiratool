@@ -4,13 +4,13 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 
-data class ShoppEntryWithItem(
+data class ShoppEntryWithProduct(
     @Embedded
     val entry: ShoppItemEntry,
 
     @Relation(
-        parentColumn = "item_id",
-        entityColumn = "SHOPP_ITEM_ID"
+        parentColumn = "product_id",
+        entityColumn = "PRODUCT_ID"
     )
-    val shopItem: ShopItem
+    val product: Product
 )

@@ -18,13 +18,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.ifpe.edu.br.common.components.CustomCard
-import com.recife.bill.feiratool.model.repository.persistence.model.ShoppEntryWithItem
+import com.recife.bill.feiratool.model.repository.persistence.model.ShoppEntryWithProduct
 import com.recife.bill.feiratool.model.utils.formatAsCurrencyBr
 import com.recife.bill.feiratool.view.ui.theme.tb_primary_light
 
 @Composable
 fun ShopEntryCard(
-    entryWithItem: ShoppEntryWithItem,
+    entryWithItem: ShoppEntryWithProduct,
     navController: NavHostController,
 ) {
     CustomCard(
@@ -47,7 +47,7 @@ fun ShopEntryCard(
 }
 
 @Composable
-private fun ItemsSumRow(entryWithItem: ShoppEntryWithItem) {
+private fun ItemsSumRow(entryWithItem: ShoppEntryWithProduct) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.End
@@ -73,7 +73,7 @@ private fun ItemsSumRow(entryWithItem: ShoppEntryWithItem) {
 }
 
 @Composable
-private fun ItemsCountValueRow(entryWithItem: ShoppEntryWithItem) {
+private fun ItemsCountValueRow(entryWithItem: ShoppEntryWithProduct) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.End
@@ -88,7 +88,7 @@ private fun ItemsCountValueRow(entryWithItem: ShoppEntryWithItem) {
 }
 
 @Composable
-private fun ItemLabelRow(entryWithItem: ShoppEntryWithItem) {
+private fun ItemLabelRow(entryWithItem: ShoppEntryWithProduct) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Start,

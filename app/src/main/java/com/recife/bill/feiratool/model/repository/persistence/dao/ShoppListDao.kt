@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
+import com.recife.bill.feiratool.model.repository.persistence.model.Product
 import com.recife.bill.feiratool.model.repository.persistence.model.ShopItem
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppItemEntry
 import com.recife.bill.feiratool.model.repository.persistence.model.ShoppList
@@ -25,6 +26,9 @@ interface ShoppListDao {
     suspend fun insertShoppItem(shoppItem: ShopItem)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertProduct(product: Product)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertShoppItemEntry(entry: ShoppItemEntry)
 
     @Transaction
@@ -34,6 +38,9 @@ interface ShoppListDao {
     @Transaction
     @Query("SELECT * FROM SHOPP_LIST ORDER BY LIST_DATE DESC")
     suspend fun getAllShoppListsWithEntries(): List<ShoppListWithEntries>
+
+    @Query("SELECT * FROM PRODUCT ORDER BY name ASC")
+    suspend fun getAllProducts(): List<Product>
 
     @Delete
     suspend fun deleteShoppItemEntry(entry: ShoppItemEntry)
