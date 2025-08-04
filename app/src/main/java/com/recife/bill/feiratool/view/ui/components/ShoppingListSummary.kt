@@ -34,94 +34,110 @@ fun ShoppingListSummary(totalValue: Double, budget: Double) {
             .fillMaxWidth()
             .padding(top = 16.dp, bottom = 8.dp)
     ) {
-        // --- LINHA TOTAL DA COMPRA ---
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            if (totalValue.formatAsCurrencyBr().length > 10) {
-                CustomColumn(
-                    layouts = listOf {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Start,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            CustomText(
-                                text = "Total da Compra:",
-                                fontSize = 20.sp,
-                                color = Color.Black.copy(alpha = .8f)
-                            )
-                        }
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.End,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            CustomText(
-                                text = totalValue.formatAsCurrencyBr(),
-                                fontSize = 30.sp,
-                                fontWeight = FontWeight.Bold,
-                                overflow = TextOverflow.Visible,
-                                color = tb_primary_secondary
-                            )
-                        }
-                    }
-                )
-            } else {
-                CustomText(
-                    text = "Total da Compra:",
-                    fontSize = 20.sp,
-                    color = Color.Black.copy(alpha = .8f)
-                )
-                CustomText(
-                    text = totalValue.formatAsCurrencyBr(),
-                    fontSize = 30.sp,
-                    fontWeight = FontWeight.Bold,
-                    overflow = TextOverflow.Visible,
-                    color = tb_primary_secondary
-                )
-            }
-        }
-        // --- LINHA DO ORÇAMENTO ---
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            CustomText(
-                text = "Orçamento:",
-                fontSize = 20.sp,
-                maxLines = 2,
-                color = Color.Black.copy(alpha = .8f)
-            )
-            CustomText(
-                text = budget.formatAsCurrencyBr(),
-                fontSize = 25.sp,
-                overflow = TextOverflow.Visible,
-                fontWeight = FontWeight.Bold,
-                color = tb_primary_light
-            )
-        }
+        TotalRow(totalValue)
+        BudgedRow(budget)
         Spacer(modifier = Modifier.padding(vertical = 8.dp))
         CustomDivider()
         Spacer(modifier = Modifier.padding(vertical = 15.dp))
-        // --- LINHA SALDO ---
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
+        BalanceRow(remaining, remainingColor)
+    }
+}
+
+@Composable
+private fun BalanceRow(
+    remaining: Double,
+    remainingColor: Color
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        CustomText(
+            text = "Saldo:",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black.copy(alpha = .8f)
+        )
+        CustomText(
+            text = remaining.formatAsCurrencyBr(),
+            fontSize = 35.sp,
+            overflow = TextOverflow.Visible,
+            fontWeight = FontWeight.Bold,
+            color = remainingColor
+        )
+    }
+}
+
+@Composable
+private fun BudgedRow(budget: Double) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        CustomText(
+            text = "Orçamento:",
+            fontSize = 20.sp,
+            maxLines = 2,
+            color = Color.Black.copy(alpha = .8f)
+        )
+        CustomText(
+            text = budget.formatAsCurrencyBr(),
+            fontSize = 25.sp,
+            overflow = TextOverflow.Visible,
+            fontWeight = FontWeight.Bold,
+            color = tb_primary_light
+        )
+    }
+}
+
+@Composable
+private fun TotalRow(totalValue: Double) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        val totalValueFormated = totalValue.formatAsCurrencyBr()
+        if (totalValueFormated.length > 10) {
+            CustomColumn(
+                layouts = listOf {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        CustomText(
+                            text = "Total da Compra:",
+                            fontSize = 20.sp,
+                            color = Color.Black.copy(alpha = .8f)
+                        )
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        CustomText(
+                            text = totalValueFormated,
+                            fontSize = 30.sp,
+                            fontWeight = FontWeight.Bold,
+                            overflow = TextOverflow.Visible,
+                            color = tb_primary_secondary
+                        )
+                    }
+                }
+            )
+        } else {
             CustomText(
-                text = "Saldo:",
+                text = "Total da Compra:",
                 fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
                 color = Color.Black.copy(alpha = .8f)
             )
             CustomText(
-                text = remaining.formatAsCurrencyBr(),
-                fontSize = 35.sp,
-                overflow = TextOverflow.Visible,
+                text = totalValueFormated,
+                fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = remainingColor
+                overflow = TextOverflow.Visible,
+                color = tb_primary_secondary
             )
         }
     }

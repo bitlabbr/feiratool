@@ -43,69 +43,138 @@ fun ShoppListCard(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                // --- LINHA DO TÍTULO ---
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    CustomText(
-                        text = item.shoppList.name,
-                        color = Color.Black,
-                        alignment = TextAlign.Justify,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 40.sp,
-                        minFontSize = 30.sp,
-                        maxLines = Int.MAX_VALUE,
-                    )
-                }
+                TitleRow(item)
                 Spacer(modifier = Modifier.padding(vertical = 10.dp))
-                // --- LINHA DO ORÇAMENTO ---
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    if (item.shoppList.budget.formatAsCurrencyBr().length > 10) {
-                        CustomColumn(
-                            layouts = listOf{
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.Start,
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    CustomText(
-                                        text = "Orçamento: ",
-                                        fontSize = 20.sp,
-                                        color = Color.Black.copy(alpha = .6f),
-                                        maxLines = 1
-                                    )
-                                }
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.End,
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    CustomText(
-                                        text = item.shoppList.budget.formatAsCurrencyBr(),
-                                        fontSize = 25.sp,
-                                        overflow = TextOverflow.Visible,
-                                        fontWeight = FontWeight.Bold,
-                                        maxLines = 1,
-                                        color = tb_primary_light
-                                    )
-                                }
-                            }
+                BudgedRow(item)
+                TotaRow(item)
+                ItemsCountRow(item)
+                Spacer(modifier = Modifier.padding(vertical = 10.dp))
+                DateRow(item)
+            }
+        }
+    )
+}
+
+@Composable
+private fun DateRow(item: ShoppListWithEntries) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.End,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        CustomText(
+            text = item.shoppList.date,
+            fontSize = 18.sp,
+            color = Color.Black.copy(alpha = .5f)
+        )
+    }
+}
+
+@Composable
+private fun ItemsCountRow(item: ShoppListWithEntries) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.End,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        CustomText(
+            text = "Itens: ",
+            fontSize = 20.sp,
+            color = Color.Black.copy(alpha = .6f)
+        )
+        CustomText(
+            text = "${item.shoppList.itemsCount}",
+            fontSize = 25.sp,
+            color = Color.Black
+        )
+    }
+}
+
+@Composable
+private fun TotaRow(item: ShoppListWithEntries) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        val listValueFormated = item.shoppList.listValue.formatAsCurrencyBr()
+        if (listValueFormated.length > 15) {
+            CustomColumn(
+                layouts = listOf {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        CustomText(
+                            text = "Total: ",
+                            fontSize = 20.sp,
+                            color = Color.Black.copy(alpha = .6f)
                         )
-                    } else {
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        CustomText(
+                            text = listValueFormated,
+                            fontSize = 30.sp,
+                            overflow = TextOverflow.Visible,
+                            fontWeight = FontWeight.Bold,
+                            color = tb_primary_secondary
+                        )
+                    }
+                }
+            )
+        } else {
+            CustomText(
+                text = "Total: ",
+                fontSize = 20.sp,
+                color = Color.Black.copy(alpha = .6f)
+            )
+            CustomText(
+                text = listValueFormated,
+                fontSize = 30.sp,
+                overflow = TextOverflow.Visible,
+                fontWeight = FontWeight.Bold,
+                color = tb_primary_secondary
+            )
+        }
+    }
+}
+
+@Composable
+private fun BudgedRow(item: ShoppListWithEntries) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        val budgetFormatted = item.shoppList.budget.formatAsCurrencyBr()
+        if (budgetFormatted.length > 10) {
+            CustomColumn(
+                layouts = listOf {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         CustomText(
                             text = "Orçamento: ",
                             fontSize = 20.sp,
                             color = Color.Black.copy(alpha = .6f),
                             maxLines = 1
                         )
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         CustomText(
-                            text = item.shoppList.budget.formatAsCurrencyBr(),
+                            text = budgetFormatted,
                             fontSize = 25.sp,
                             overflow = TextOverflow.Visible,
                             fontWeight = FontWeight.Bold,
@@ -114,89 +183,41 @@ fun ShoppListCard(
                         )
                     }
                 }
-                // --- LINHA DO TOTAL ---
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-                    if (item.shoppList.listValue.formatAsCurrencyBr().length > 15) {
-                        CustomColumn(
-                            layouts = listOf{
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.Start,
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    CustomText(
-                                        text = "Total: ",
-                                        fontSize = 20.sp,
-                                        color = Color.Black.copy(alpha = .6f)
-                                    )
-                                }
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.End,
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    CustomText(
-                                        text = item.shoppList.listValue.formatAsCurrencyBr(),
-                                        fontSize = 30.sp,
-                                        overflow = TextOverflow.Visible,
-                                        fontWeight = FontWeight.Bold,
-                                        color = tb_primary_secondary
-                                    )
-                                }
-                            }
-                        )
-                    } else {
-                        CustomText(
-                            text = "Total: ",
-                            fontSize = 20.sp,
-                            color = Color.Black.copy(alpha = .6f)
-                        )
-                        CustomText(
-                            text = item.shoppList.listValue.formatAsCurrencyBr(),
-                            fontSize = 30.sp,
-                            overflow = TextOverflow.Visible,
-                            fontWeight = FontWeight.Bold,
-                            color = tb_primary_secondary
-                        )
-                    }
-                }
-                // --- LINHA DE ITENS ---
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    CustomText(
-                        text = "Itens: ",
-                        fontSize = 20.sp,
-                        color = Color.Black.copy(alpha = .6f)
-                    )
-                    CustomText(
-                        text = "${item.shoppList.itemsCount}",
-                        fontSize = 25.sp,
-                        color = Color.Black
-                    )
-                }
-                Spacer(modifier = Modifier.padding(vertical = 10.dp))
-                // --- LINHA DA DATA ---
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-                    CustomText(
-                        text = item.shoppList.date,
-                        fontSize = 18.sp,
-                        color = Color.Black.copy(alpha = .5f)
-                    )
-                }
-            }
+            )
+        } else {
+            CustomText(
+                text = "Orçamento: ",
+                fontSize = 20.sp,
+                color = Color.Black.copy(alpha = .6f),
+                maxLines = 1
+            )
+            CustomText(
+                text = budgetFormatted,
+                fontSize = 25.sp,
+                overflow = TextOverflow.Visible,
+                fontWeight = FontWeight.Bold,
+                maxLines = 1,
+                color = tb_primary_light
+            )
         }
-    )
+    }
+}
+
+@Composable
+private fun TitleRow(item: ShoppListWithEntries) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        CustomText(
+            text = item.shoppList.name,
+            color = Color.Black,
+            alignment = TextAlign.Justify,
+            fontWeight = FontWeight.Bold,
+            fontSize = 40.sp,
+            minFontSize = 30.sp,
+            maxLines = Int.MAX_VALUE,
+        )
+    }
 }

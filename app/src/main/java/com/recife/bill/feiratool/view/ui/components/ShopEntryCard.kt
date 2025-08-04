@@ -38,55 +38,71 @@ fun ShopEntryCard(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-
-                // --- LINHA NOME E DETALHES DO CÁLCULO ---
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        modifier = Modifier.weight(1f),
-                        text = buildAnnotatedString {
-                            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                                append(entryWithItem.shopItem.name)
-                            }
-                        },
-                        fontSize = 20.sp,
-                        color = Color.Black
-                    )
-                    Text(
-                        text = "${entryWithItem.entry.itemCount} x ${entryWithItem.entry.priceAtTimeOfEntry.formatAsCurrencyBr()}",
-                        fontSize = 14.sp,
-                        color = Color.Black.copy(alpha = .8f),
-                        modifier = Modifier.padding(start = 8.dp)
-                    )
-                }
-
-                // --- LINHA SUBTOTAL ---
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
-
-                    Text(
-                        text = buildAnnotatedString {
-                            append("Subtotal: ")
-                            withStyle(
-                                style = SpanStyle(
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 18.sp,
-                                    color = tb_primary_light
-                                )
-                            ) {
-                                append(entryWithItem.entry.itemsValue.formatAsCurrencyBr())
-                            }
-                        },
-                        fontSize = 14.sp,
-                        color = Color.Black.copy(alpha = .8f)
-                    )
-                }
+                ItemLabelRow(entryWithItem)
+                ItemsCountValueRow(entryWithItem)
+                ItemsSumRow(entryWithItem)
             }
         }
     )
+}
+
+@Composable
+private fun ItemsSumRow(entryWithItem: ShoppEntryWithItem) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.End
+    ) {
+
+        Text(
+            text = buildAnnotatedString {
+                append("Subtotal: ")
+                withStyle(
+                    style = SpanStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
+                        color = tb_primary_light
+                    )
+                ) {
+                    append(entryWithItem.entry.itemsValue.formatAsCurrencyBr())
+                }
+            },
+            fontSize = 14.sp,
+            color = Color.Black.copy(alpha = .8f)
+        )
+    }
+}
+
+@Composable
+private fun ItemsCountValueRow(entryWithItem: ShoppEntryWithItem) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.End
+    ) {
+        Text(
+            text = "${entryWithItem.entry.itemCount} x ${entryWithItem.entry.priceAtTimeOfEntry.formatAsCurrencyBr()}",
+            fontSize = 14.sp,
+            color = Color.Black.copy(alpha = .8f),
+            modifier = Modifier.padding(start = 8.dp)
+        )
+    }
+}
+
+@Composable
+private fun ItemLabelRow(entryWithItem: ShoppEntryWithItem) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Start,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            modifier = Modifier.weight(1f),
+            text = buildAnnotatedString {
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append(entryWithItem.shopItem.name)
+                }
+            },
+            fontSize = 20.sp,
+            color = Color.Black
+        )
+    }
 }
