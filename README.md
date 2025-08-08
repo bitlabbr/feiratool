@@ -8,7 +8,7 @@ Cansado de chegar ao caixa do supermercado e ter uma surpresa com o valor total 
 
 Esta é a versão inicial do projeto, focada em fornecer as ferramentas essenciais para um controle de compras eficiente e sem estresse.
 
-## ✨ Funcionalidades da v1.0
+## ✨ Funcionalidades da v0.1.0-alpha
 
 * **Crie e Gerencie Listas**: Crie quantas listas de compras você precisar, com nomes personalizados.
 * **Defina um Orçamento**: Atribua um valor de orçamento para cada lista e acompanhe seu saldo.
@@ -38,7 +38,7 @@ Se você deseja compilar o projeto a partir do código-fonte:
 
 1.  **Clone o repositório:**
     ```bash
-    git clone https://github.com/billjsan/feiratool
+    git clone https://github.com/bitlabbr/feiratool
     ```
 2.  **Abra no Android Studio:**
     * Abra o Android Studio (versão Hedgehog ou mais recente).
@@ -52,7 +52,7 @@ Se você deseja compilar o projeto a partir do código-fonte:
 
 Você pode instalar o aplicativo diretamente no seu celular Android.
 
-1.  **Baixe o APK**: Vá para a seção **Releases** deste repositório e baixe o arquivo `FeiraTool-v1.0.0.apk`.
+1.  **Baixe o APK**: Vá para a seção **Releases** deste repositório e baixe o arquivo `feira_tool_v0.1.1-alpha.apk`.
 2.  **Permita a Instalação**: No seu celular, talvez seja necessário permitir a instalação de aplicativos de "fontes desconhecidas". Vá em **Configurações > Segurança** e habilite a opção.
 3.  **Instale**: Abra o arquivo `.apk` que você baixou e siga as instruções para instalar.
 
